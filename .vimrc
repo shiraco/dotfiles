@@ -14,7 +14,7 @@
 " インデントの各段階に使われる空白の数。
 :set shiftwidth=4
 " Insertモードで <Tab>
-を挿入するとき、代わりに適切な数の空白を使う。（有効:expandtab/無効:noexpandtab）
+" を挿入するとき、代わりに適切な数の空白を使う。（有効:expandtab/無効:noexpandtab）
 :set noexpandtab
 
 " 入力されているテキストの最大幅。行がそれより長くなると、この幅を超えないように空白の後で改行される。値を
