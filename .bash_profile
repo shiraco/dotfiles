@@ -8,7 +8,6 @@ ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/lo
 #global
 export EDITOR='subl'
 
-export TERM=vt100-color
 export LANG=ja_JP.UTF8
 
 export HISTSIZE=10000
