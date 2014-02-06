@@ -14,3 +14,5 @@ export PATH=/usr/local/bin:$PATH
 
 # alias
 alias py='python'
+alias bex='bundle exec'
+function gi() { curl http://www.gitignore.io/api/$@ ;}
