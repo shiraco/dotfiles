@@ -1,6 +1,12 @@
 #rbenv
+export RBENV_ROOT="$HOME/.rbenv"
+export PATH="$RBENV/shims:$PATH"
 eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/shims:$PATH"
+
+#pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 #global
 export EDITOR='subl'
