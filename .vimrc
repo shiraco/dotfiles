@@ -1,3 +1,7 @@
+:set autoread
+syntax on
+
+
 " 検索
 " 検索パターンにおいて大文字と小文字を区別しない。（有効:ignorecase/無効:noignorecase）
 :set noignorecase
