@@ -23,7 +23,7 @@
 " 新しい行を開始したとき (Insertモードで <CR> を打ち込むか、コマンド "o"や
 " "O"
 " を使ったとき)、新しい行のインデントを現在行と同じくする。（有効:autoindent/無効:noautoindent）
-:set autoindent
+:set noautoindent
 
 " オンのときは、ウィンドウの幅より長い行は折り返され、次の行に続けて表示される。（有効:wrap/無効:nowrap）
 :set wrap

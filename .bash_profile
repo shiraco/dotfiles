@@ -22,4 +22,13 @@ eval "$(pyenv init -)"
 # alias
 alias py='python'
 alias bex='bundle exec'
+
 function gi() { curl http://www.gitignore.io/api/$@ ;}
+
+#scala
+SCALA_HOME=/usr/local/Cellar/scala/2.10.3
+export SCALA_HOME
+export PATH=$PATH:$SCALA_HOME/bin
+
+
+
