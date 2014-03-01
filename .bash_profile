@@ -1,7 +1,7 @@
 #global
 export PATH=/usr/local/bin:$PATH
 
-export EDITOR='subl'
+#export EDITOR='subl'
 
 export LANG=ja_JP.UTF-8
 
