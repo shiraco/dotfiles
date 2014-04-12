@@ -31,4 +31,5 @@ export SCALA_HOME
 export PATH=$PATH:$SCALA_HOME/bin
 
 
-
+# httpd
+export PATH=/usr/local/Cellar/httpd/2.2.27/sbin:$PATH
