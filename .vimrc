@@ -1,96 +1,78 @@
-:set autoread
-syntax on
+" http://vimblog.hatenablog.com/entry/vimrc_set_recommended_options
 
+" Vi互換モードをオフ（Vimの拡張機能を有効）
+set nocompatible
 
-" 検索
-" 検索パターンにおいて大文字と小文字を区別しない。（有効:ignorecase/無効:noignorecase）
-:set noignorecase
-" 検索パターンが大文字を含んでいたらオプション 'ignorecase'
-" を上書きする。（有効:smartcase/無効:nosmartcase）
-:set smartcase
+" 画面表示の設定
 
-" TAB
-" ファイル内の <Tab> が対応する空白の数。
-:set tabstop=4
-" <Tab> の挿入や <BS> の使用等の編集操作をするときに、<Tab>
-" が対応する空白の数。
-:set softtabstop=4
-" インデントの各段階に使われる空白の数。
-:set shiftwidth=4
-" Insertモードで <Tab>
-" を挿入するとき、代わりに適切な数の空白を使う。（有効:expandtab/無効:noexpandtab）
-:set noexpandtab
+syntax on          " 色づけをオン
+set number         " 行番号を表示する
+set cursorline     " カーソル行の背景色を変える
+set cursorcolumn   " カーソル位置のカラムの背景色を変える
+set laststatus=2   " ステータス行を常に表示
+set cmdheight=2    " メッセージ表示欄を2行確保
+set showmatch      " 対応する括弧を強調表示
+set helpheight=999 " ヘルプを画面いっぱいに開く
+set list           " 不可視文字を表示
+set ruler          " 画面最下行にルーラーを表示する
+set wrap           " ウィンドウの幅より長い行は折り返され、次の行に続けて表示する
+set wrapscan       " 検索がファイル末尾まで進んだら、ファイル先頭から再び検索する
+set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮ " 不可視文字の表示記号指定
 
-" 入力されているテキストの最大幅。行がそれより長くなると、この幅を超えないように空白の後で改行される。値を
-" 0 に設定すると無効になる。
-:set textwidth=0
-" 新しい行を開始したとき (Insertモードで <CR> を打ち込むか、コマンド "o"や
-" "O"
-" を使ったとき)、新しい行のインデントを現在行と同じくする。（有効:autoindent/無効:noautoindent）
-:set noautoindent
+" カーソル移動関連の設定
 
-" オンのときは、ウィンドウの幅より長い行は折り返され、次の行に続けて表示される。（有効:wrap/無効:nowrap）
-:set wrap
+set backspace=indent,eol,start " Backspaceキーの影響範囲に制限を設けない
+set whichwrap=b,s,h,l,<,>,[,]  " 行頭行末の左右移動で行をまたぐ
+set scrolloff=8                " 上下8行の視界を確保
+set sidescrolloff=16           " 左右スクロール時の視界を確保
+set sidescroll=1               " 左右スクロールは一文字づつ行う
+set nostartofline              " 移動コマンドを使ったとき、行頭に移動しない
 
-" 検索がファイル末尾まで進んだら、ファイル先頭から再び検索する。（有効:wrapscan/無効:nowrapscan）
-:set wrapscan
+" ファイル処理関連の設定
 
-" オンのとき、コマンドライン補完が拡張モードで行われる。（有効:wildmenu/無効:nowildmenu）
-:set wildmenu
+set confirm    " 保存されていないファイルがあるときは終了前に保存確認
+set hidden     " 保存されていないファイルがあるときでも別のファイルを開くことが出来る
+set autoread   " 外部でファイルに変更がされた場合は読みなおす
+set nobackup   " ファイル保存時にバックアップファイルを作らない
+set noswapfile " ファイル編集中にスワップファイルを作らない
+filetype indent plugin on " ファイル名と内容によってファイルタイプを判別し、ファイルタイププラグイン有効化
 
-" 閉じ括弧が入力されたとき、対応する開き括弧にわずかの間ジャンプする。（有効:showmatch/無効:noshowmatch）
-:set showmatch
+" 検索/置換の設定
 
-" 毎行の前に行番号を表示する。（有効:number/無効:nonumber）
-:set number
+set hlsearch   " 検索文字列をハイライトする
+set incsearch  " インクリメンタルサーチを行う
+set ignorecase " 大文字と小文字を区別しない
+set smartcase  " 大文字と小文字が混在した言葉で検索を行った場合に限り、大文字と小文字を区別する
+set wrapscan   " 最後尾まで検索を終えたら次の検索で先頭に移る
+set gdefault   " 置換の時 g オプションをデフォルトで有効にする
 
-" カーソルが何行目の何列目に置かれているかを表示する。（有効:ruler/無効:noruler）
-:set ruler
-" タブ文字を CTRL-I で表示し、行末に $ で表示する。（有効:list/無効:nolist）
-:set list
-" Listモード (訳注: オプション 'list' がオンのとき)
-" に使われる文字を設定する。
-:set listchars=tab:>-,extends:<,trail:-,eol:<
+" タブ/インデントの設定
 
-" 最下ウィンドウにいつステータス行が表示されるかを設定する。
-"               0: 全く表示しない
-"               1: ウィンドウの数が2以上のときのみ表示
-"               2: 常に表示
-" :set laststatus=2
-" コマンド (の一部)
-" を画面の最下行に表示する。（有効:showcmd/無効:noshowcmd）
-:set showcmd
+set expandtab     " タブ入力を複数の空白入力に置き換える
+set tabstop=4     " 画面上でタブ文字が占める幅
+set shiftwidth=4  " 自動インデントでずれる幅
+set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
+set autoindent    " 改行時に前の行のインデントを継続する
+set smartindent   " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
-" ファイルを上書きする前にバックアップを作る。書き込みが成功してもバックアップはそのまま取っておく。（有効:backup/無効:nobackup）
-:set nobackup
-" ファイルの上書きの前にバックアップを作る。オプション 'backup'
-" がオンでない限り、バックアップは上書きに成功した後削除される。（有効:writebackup/無効:nowritebackup）
-:set writebackup
+" 動作環境との統合関連の設定
 
+set clipboard=unnamed,unnamedplus " OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
+set mouse=a                       " マウスの入力を受け付ける
 
- if has('vim_starting')
-   set nocompatible               " Be iMproved
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
- endif
+" コマンドラインの設定
 
- call neobundle#rc(expand('~/.vim/bundle/'))
+set wildmenu wildmode=list:longest,full " コマンドラインモードでTABキーによるファイル名補完を有効にする
+set history=10000                       " コマンドラインの履歴を10000件保存する
+set showcmd                             " タイプ途中のコマンドを画面最下行に表示
 
- " Let NeoBundle manage NeoBundle
- NeoBundleFetch 'Shougo/neobundle.vim'
+" ビープの設定
 
- NeoBundle 'Shougo/vimproc'
- NeoBundle 'Shougo/unite.vim'
+set visualbell t_vb= " ビープ音すべてを無効にする
+set noerrorbells     " エラーメッセージの表示時にビープを鳴らさない
 
- " NeoSnippets
- NeoBundle 'Shougo/neocomplcache'
- NeoBundle 'Shougo/neosnippet'
+" その他
 
- " Added For Ruby Programming
- NeoBundle 'AndrewRadev/switch.vim'
- NeoBundle 'tpope/vim-endwise'
-
- filetype plugin indent on     " Required!
- NeoBundleCheck
- 
-  
+set notimeout ttimeout ttimeoutlen=200 " キーコードはすぐにタイムアウト。マッピングはタイムアウトしない
+set pastetoggle=<F11>                  " <F11>キーで'paste'と'nopaste'を切り替える<
 
