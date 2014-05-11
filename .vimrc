@@ -57,7 +57,7 @@ set smartindent   " 改行時に入力された行の末尾に合わせて次の
 
 " 動作環境との統合関連の設定
 
-set clipboard=unnamed,unnamedplus " OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
+set clipboard=unnamed,unnamedplus,autoselect " OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
 set mouse=a                       " マウスの入力を受け付ける
 
 " コマンドラインの設定
