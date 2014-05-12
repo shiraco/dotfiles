@@ -17,6 +17,7 @@ set list           " 不可視文字を表示
 set ruler          " 画面最下行にルーラーを表示する
 set wrap           " ウィンドウの幅より長い行は折り返され、次の行に続けて表示する
 set wrapscan       " 検索がファイル末尾まで進んだら、ファイル先頭から再び検索する
+set ambiwidth=double " 2byte 文字を正しく表示させる
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮ " 不可視文字の表示記号指定
 
 " カーソル移動関連の設定
