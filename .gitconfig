@@ -11,6 +11,22 @@
 		while [ $# -gt 0 ]; do s="$s,$1"; shift; done;\
 		curl "http://www.gitignore.io/api/$s"; }; f"
 	co = checkout
-	st = status
+	st = status -sb
 	br = branch
 	ci = commit
+    d = diff
+    di = diff
+    dc = diff --cached
+    dic = diff --cached
+    l = log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
+    ll = log --stat --abbrev-commit
+    ln = log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset' --name-status
+    lp = log --stat -n 20 -p
+    ls = log --stat --abbrev-commit -n 1 # display previous log
+    mr = merge
+    mrno = merge --no-ff
+[push]
+    default = current
+[diff]
+    algorithm = patience
+
