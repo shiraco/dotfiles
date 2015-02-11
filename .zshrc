@@ -10,6 +10,19 @@ export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 export GREP_OPTIONS='--color=auto'
 export PATH=$HOME/bin:$PATH
 
+export EDITOR='vim'
+
+# PATH
+# rbenv
+export RBENV_ROOT="$HOME/.rbenv"
+export PATH="$RBENV_ROOT/bin:$PATH"
+eval "$(rbenv init -)"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
@@ -129,6 +142,12 @@ alias sudo='sudo '
 alias -g L='| less'
 alias -g G='| grep'
 
+# python
+alias py='python'
+
+# ruby
+alias bex='bundle exec'
+
 ########################################
 # OS 別の設定
 case ${OSTYPE} in
@@ -136,8 +155,23 @@ case ${OSTYPE} in
         #Mac用の設定
         export CLICOLOR=1
         alias ls='ls -G -F'
+
+        #関数定義(引数3つ)
+        tab-color() {
+            echo -ne "\033]6;1;bg;red;brightness;$1\a"
+            echo -ne "\033]6;1;bg;green;brightness;$2\a"
+            echo -ne "\033]6;1;bg;blue;brightness;$3\a"
+        }
+
+        tab-reset() {
+            echo -ne "\033]6;1;bg;*;default\a"
+        }
+
+        function chpwd() { ls; echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007"}
+        alias top='tab-color 134 200 0; top; tab-reset'
         ;;
     linux*)
+
         #Linux用の設定
         alias ls='ls -F --color=auto'
         ;;
