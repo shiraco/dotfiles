@@ -1,5 +1,9 @@
 " http://vimblog.hatenablog.com/entry/vimrc_set_recommended_options
 
+" 文字コード
+scriptencoding utf-8
+set encoding=utf-8
+
 " Vi互換モードをオフ（Vimの拡張機能を有効）
 set nocompatible
 
@@ -76,4 +80,3 @@ set noerrorbells     " エラーメッセージの表示時にビープを鳴ら
 
 set notimeout ttimeout ttimeoutlen=200 " キーコードはすぐにタイムアウト。マッピングはタイムアウトしない
 set pastetoggle=<F11>                  " <F11>キーで'paste'と'nopaste'を切り替える<
-

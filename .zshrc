@@ -5,7 +5,9 @@
 ########################################
 # 環境変数
 export TZ=Asia/Tokyo
-export LANG=ja_JP.utf8
+export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
+export LC_MESSAGES=ja_JP.UTF-8
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 export GREP_OPTIONS='--color=auto'
 export PATH=$HOME/bin:$PATH
@@ -75,7 +77,7 @@ zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
 function _update_vcs_info_msg() {
-    LANG=en_US.UTF-8 vcs_info
+    LANG=ja_JP.UTF-8 vcs_info
     RPROMPT="${vcs_info_msg_0_}"
 }
 add-zsh-hook precmd _update_vcs_info_msg
@@ -147,6 +149,10 @@ alias py='python'
 
 # ruby
 alias bex='bundle exec'
+
+alias firefox="open -a Firefox"
+alias safari="open -a Safari"
+alias chrome="open /Applications/Google\ Chrome.app"
 
 ########################################
 # OS 別の設定
