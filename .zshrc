@@ -21,9 +21,11 @@ export PATH="$RBENV_ROOT/bin:$PATH"
 eval "$(rbenv init -)"
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+export PYENV_ROOT="${HOME}/.pyenv"
+if [ -d "${PYENV_ROOT}" ]; then
+    export PATH=${PYENV_ROOT}/bin:$PATH
+    eval "$(pyenv init -)"
+fi
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -33,6 +35,9 @@ colors
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
+
+# http://dqn.sakusakutto.jp/2014/10/emacs_shell_iterm2_zsh.html
+DISABLE_AUTO_TITLE="true"
 
 # プロンプト
 # 1行表示
@@ -52,8 +57,12 @@ zstyle ':zle:*' word-style unspecified
 ########################################
 # 補完
 # 補完機能を有効にする
+
+#for zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 autoload -Uz compinit
-compinit
+compinit -u
 
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -124,6 +133,7 @@ setopt extended_glob
 
 # ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
 bindkey '^R' history-incremental-pattern-search-backward
+bindkey -e
 
 ########################################
 # エイリアス
@@ -184,3 +194,7 @@ case ${OSTYPE} in
 esac
 
 # vim:set ft=zsh:
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# added by travis gem
+[ -f /Users/shiraishi/.travis/travis.sh ] && source /Users/shiraishi/.travis/travis.sh
