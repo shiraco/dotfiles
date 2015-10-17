@@ -15,12 +15,12 @@ export PATH=$HOME/bin:$PATH
 export EDITOR='vim'
 
 # PATH
-# rbenv
+# rbenv - brew install rbenv
 export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/bin:$PATH"
 eval "$(rbenv init -)"
 
-# pyenv
+# pyenv - brew install pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
