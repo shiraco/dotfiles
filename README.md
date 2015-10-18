@@ -1,10 +1,7 @@
 dotfiles
 ========
 
-dotfiles
-
 example
 ```
-cd ~/
-ln -sf dotfiles/.zshrc .zshrc
+ln -s ~/dotfiles/.zshrc ~/.zshrc
 ```
