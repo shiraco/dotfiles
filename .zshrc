@@ -166,10 +166,13 @@ alias chrome="open /Applications/Google\ Chrome.app"
 
 # colordiff
 if [[ -x `which colordiff` ]]; then
-  alias diff='colordiff -u'
+  alias diff='colordiff'
 else
-  alias diff='diff -u'
+  alias diff='diff'
 fi
+
+# less
+export LESS='-R'
 
 ########################################
 # OS 別の設定
