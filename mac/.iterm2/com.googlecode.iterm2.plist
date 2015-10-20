@@ -1115,7 +1115,7 @@
 			<key>Horizontal Spacing</key>
 			<real>1</real>
 			<key>Idle Code</key>
-			<integer>0</integer>
+			<integer>20</integer>
 			<key>Initial Text</key>
 			<string></string>
 			<key>Jobs to Ignore</key>
@@ -1466,7 +1466,7 @@
 				<string></string>
 			</dict>
 			<key>Send Code When Idle</key>
-			<false/>
+			<true/>
 			<key>Set Local Environment Vars</key>
 			<true/>
 			<key>Shortcut</key>
@@ -1599,7 +1599,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>463291842.96655703</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>466818632.83247697</real>
+	<real>467012442.415802</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1664,7 +1664,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-10-17T23:50:31Z</date>
+	<date>2015-10-20T05:25:39Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
