@@ -14,6 +14,12 @@ export PATH=$HOME/bin:$PATH
 
 export EDITOR='vim'
 
+# Proxy
+alias nswitch="source ~/.switch_proxy"
+
+# direnv
+eval "$(direnv hook zsh)"
+
 # PATH
 # rbenv - brew install rbenv
 export RBENV_ROOT="$HOME/.rbenv"
@@ -26,6 +32,13 @@ if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
 fi
+
+# virtualenv
+alias vactivate='source ./.venv/bin/activate'
+venv() {
+    PWD_FOR_VE_CREATE=`pwd`
+    virtualenv ./.venv --prompt='('`basename $PWD_FOR_VE_CREATE`')'
+}
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -159,6 +172,13 @@ alias py='python'
 
 # ruby
 alias bex='bundle exec'
+
+# go
+if [ -x "`which go`" ]; then
+      export GOROOT=`go env GOROOT`
+      export GOPATH=$HOME/code/go-local
+      export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+fi
 
 alias firefox="open -a Firefox"
 alias safari="open -a Safari"
