@@ -40,6 +40,9 @@ venv() {
     virtualenv ./.venv --prompt='('`basename $PWD_FOR_VE_CREATE`')'
 }
 
+# python
+alias pyform='python ~/scripts/python/fmt_python.py'
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
