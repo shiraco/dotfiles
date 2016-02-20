@@ -2,7 +2,7 @@
   <tool name="Flake8 File" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
     <exec>
       <option name="COMMAND" value="flake8" />
-      <option name="PARAMETERS" value="--max-line-length=120 --ignore=E301,E302,E261,E262,W404 $FileDir$/$FileName$" />
+      <option name="PARAMETERS" value="--max-line-length=120 --ignore=E301,E302,E261,E262,W404,D100,F403,H303 $FileDir$/$FileName$" />
       <option name="WORKING_DIRECTORY" value="$FileDir$" />
     </exec>
     <filter>
@@ -19,7 +19,7 @@
   <tool name="Flake8 Directory" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="true" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
     <exec>
       <option name="COMMAND" value="flake8" />
-      <option name="PARAMETERS" value="--max-line-length=120 --ignore=E301,E302,E261,E262,W404 $FileDir$" />
+      <option name="PARAMETERS" value="--max-line-length=120 --ignore=E301,E302,E261,E262,W404,D100,F403,H303 $FileDir$" />
       <option name="WORKING_DIRECTORY" value="$FileDir$" />
     </exec>
     <filter>
