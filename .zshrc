@@ -184,6 +184,16 @@ alias firefox="open -a Firefox"
 alias safari="open -a Safari"
 alias chrome="open /Applications/Google\ Chrome.app"
 
+# colordiff
+if [[ -x `which colordiff` ]]; then
+  alias diff='colordiff'
+else
+  alias diff='diff'
+fi
+
+# less
+export LESS='-R'
+
 ########################################
 # OS 別の設定
 case ${OSTYPE} in
