@@ -2,7 +2,7 @@
   <tool name="isort File" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
     <exec>
       <option name="COMMAND" value="isort" />
-      <option name="PARAMETERS" value="lines=120 $FileDir$/$FileName$" />
+      <option name="PARAMETERS" value="--lines=120 $FileDir$/$FileName$" />
       <option name="WORKING_DIRECTORY" value="$FileDir$" />
     </exec>
   </tool>
