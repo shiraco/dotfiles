@@ -1,0 +1,9 @@
+<toolSet name="pyformat">
+  <tool name="pyformat File" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="pyformat" />
+      <option name="PARAMETERS" value="--in-place $FileDir$/$FileName$" />
+      <option name="WORKING_DIRECTORY" value="$FileDir$" />
+    </exec>
+  </tool>
+</toolSet>
