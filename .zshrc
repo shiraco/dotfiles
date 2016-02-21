@@ -199,6 +199,10 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 alias nswitch="source ~/.switch_proxy"
 ## fmt_python
 alias pyform='python ~/scripts/python/fmt_python.py'
+## git
+alias gipy='gi python > .gitignore; echo "# virtualenv\n.venv/\n\n# PyCharm\n.idea/\n" >> .gitignore'
+
+
 
 alias firefox="open -a Firefox"
 alias safari="open -a Safari"
