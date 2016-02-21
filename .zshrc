@@ -173,11 +173,22 @@ alias pireq='pip install -r requirements.txt'
 alias pifre='pip freeze > requirements.txt'
 
 # virtualenv
-alias vactivate='source ./.venv/bin/activate'
-venv() {
+function venv() {
     PWD_FOR_VE_CREATE=`pwd`
     virtualenv ./.venv --prompt='('`basename $PWD_FOR_VE_CREATE`')'
 }
+
+# zsh でディレクトリ変更したらchpwdが呼ばれる
+function vactivate() {
+  if [ -d .venv ]; then
+      source .venv/bin/activate
+  fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd vactivate
+
+# 読み込み時にも実行
+vactivate
 
 # git
 # vim:set ft=zsh:
