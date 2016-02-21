@@ -14,36 +14,28 @@ export PATH=$HOME/bin:$PATH
 
 export EDITOR='vim'
 
-# Proxy
-alias nswitch="source ~/.switch_proxy"
-
-# direnv
+# カスタムパス
+## direnv
 eval "$(direnv hook zsh)"
 
-# PATH
-# rbenv - brew install rbenv
+## rbenv - brew install rbenv
 export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/bin:$PATH"
 eval "$(rbenv init -)"
 
-# pyenv - brew install pyenv
+## pyenv - brew install pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
 fi
 
-# virtualenv
-alias vactivate='source ./.venv/bin/activate'
-venv() {
-    PWD_FOR_VE_CREATE=`pwd`
-    virtualenv ./.venv --prompt='('`basename $PWD_FOR_VE_CREATE`')'
-}
-
-# python
-alias pyform='python ~/scripts/python/fmt_python.py'
-alias pireq='pip install -r requirements.txt'
-alias pifre='pip freeze > requirements.txt'
+## go
+if [ -x "`which go`" ]; then
+      export GOROOT=`go env GOROOT`
+      export GOPATH=$HOME/code/go-local
+      export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+fi
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -172,18 +164,30 @@ alias sudo='sudo '
 alias -g L='| less'
 alias -g G='| grep'
 
-# python
-alias py='python'
-
 # ruby
 alias bex='bundle exec'
 
-# go
-if [ -x "`which go`" ]; then
-      export GOROOT=`go env GOROOT`
-      export GOPATH=$HOME/code/go-local
-      export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-fi
+# python
+alias py='python'
+alias pireq='pip install -r requirements.txt'
+alias pifre='pip freeze > requirements.txt'
+
+# virtualenv
+alias vactivate='source ./.venv/bin/activate'
+venv() {
+    PWD_FOR_VE_CREATE=`pwd`
+    virtualenv ./.venv --prompt='('`basename $PWD_FOR_VE_CREATE`')'
+}
+
+# git
+# vim:set ft=zsh:
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# カスタムスクリプト
+## Proxy
+alias nswitch="source ~/.switch_proxy"
+## fmt_python
+alias pyform='python ~/scripts/python/fmt_python.py'
 
 alias firefox="open -a Firefox"
 alias safari="open -a Safari"
@@ -227,9 +231,6 @@ case ${OSTYPE} in
         alias ls='ls -F --color=auto'
         ;;
 esac
-
-# vim:set ft=zsh:
-function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # added by travis gem
 [ -f /Users/shiraishi/.travis/travis.sh ] && source /Users/shiraishi/.travis/travis.sh
