@@ -42,6 +42,8 @@ venv() {
 
 # python
 alias pyform='python ~/scripts/python/fmt_python.py'
+alias pireq='pip install -r requirements.txt'
+alias pifre='pip freeze > requirements.txt'
 
 # 色を使用出来るようにする
 autoload -Uz colors
