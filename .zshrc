@@ -37,6 +37,9 @@ if [ -x "`which go`" ]; then
       export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 fi
 
+## hubコマンド
+eval "$(hub alias -s)"
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
