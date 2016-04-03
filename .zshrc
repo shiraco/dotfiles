@@ -39,9 +39,9 @@ export EDITOR='vim'
 }
 
 : "Setting Ruby" && {
-    ## rbenv - brew install rbenv
-    if [ -x "`which rbenv`" ]; then
-        export RBENV_ROOT="$HOME/.rbenv"
+    ## rbenv
+    export RBENV_ROOT="$HOME/.rbenv"
+    if [ -d "${RBENV_ROOT}" ]; then
         export PATH="$RBENV_ROOT/bin:$PATH"
         eval "$(rbenv init -)"
     fi
@@ -52,8 +52,8 @@ export EDITOR='vim'
 
 : "Setting Python" && {
     ## pyenv
-    if [ -x "`which pyenv`" ]; then
-        export PYENV_ROOT="${HOME}/.pyenv"
+    export PYENV_ROOT="${HOME}/.pyenv"
+    if [ -d "${PYENV_ROOT}" ]; then
         export PATH="${PYENV_ROOT}/bin:$PATH"
         eval "$(pyenv init -)"
     fi
