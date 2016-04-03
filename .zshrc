@@ -37,6 +37,11 @@ if [ -x "`which go`" ]; then
       export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 fi
 
+
+## naoqi
+export PYTHONPATH=${PYTHONPATH}:~/naoqi/pynaoqi-python2.7-2.1.4.13-mac64
+export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:~/naoqi/pynaoqi-python2.7-2.1.4.13-mac64
+
 ## hubコマンド
 eval "$(hub alias -s)"
 
@@ -179,6 +184,7 @@ alias pifre='pip freeze > requirements.txt'
 function venv() {
     PWD_FOR_VE_CREATE=`pwd`
     virtualenv ./.venv --prompt='('`basename $PWD_FOR_VE_CREATE`')'
+    pip install --upgrade pip
 }
 
 # zsh でディレクトリ変更したらchpwdが呼ばれる
@@ -200,6 +206,9 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 # カスタムスクリプト
 ## Proxy
 alias nswitch="source ~/.switch_proxy"
+# 読み込み時にも実行
+nswitch
+
 ## fmt_python
 alias pyform='python ~/scripts/python/fmt_python.py'
 ## git
