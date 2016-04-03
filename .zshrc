@@ -10,40 +10,95 @@ export LC_ALL=ja_JP.UTF-8
 export LC_MESSAGES=ja_JP.UTF-8
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 export GREP_OPTIONS='--color=auto'
-export PATH=$HOME/bin:$PATH
 
 export EDITOR='vim'
 
-# カスタムパス
-## direnv
-eval "$(direnv hook zsh)"
+: "Setting Proxy" && {
+    alias nswitch="source ~/.switch_proxy"
+    # 読み込み時にも実行
+    if [ -f "~/.switch_proxy" ]; then
+        nswitch
+    fi
+}
 
-## rbenv - brew install rbenv
-export RBENV_ROOT="$HOME/.rbenv"
-export PATH="$RBENV_ROOT/bin:$PATH"
-eval "$(rbenv init -)"
+: "Setting Git" && {
+    # .gitignore
+    function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
-## pyenv - brew install pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH=${PYENV_ROOT}/bin:$PATH
-    eval "$(pyenv init -)"
-fi
+    ## hubコマンド
+    if [ -x "`which hub`" ]; then
+        eval "$(hub alias -s)"
+    fi
+}
 
-## go
-if [ -x "`which go`" ]; then
-      export GOROOT=`go env GOROOT`
-      export GOPATH=$HOME/code/go-local
-      export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-fi
+: "Setting Direnv" && {
+    ## direnv
+    if [ -x "`which direnv`" ]; then
+        eval "$(direnv hook zsh)"
+    fi
+}
 
+: "Setting Ruby" && {
+    ## rbenv - brew install rbenv
+    if [ -x "`which rbenv`" ]; then
+        export RBENV_ROOT="$HOME/.rbenv"
+        export PATH="$RBENV_ROOT/bin:$PATH"
+        eval "$(rbenv init -)"
+    fi
 
-## naoqi
-export PYTHONPATH=${PYTHONPATH}:~/naoqi/pynaoqi-python2.7-2.1.4.13-mac64
-export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:~/naoqi/pynaoqi-python2.7-2.1.4.13-mac64
+    # alias
+    alias bex='bundle exec'
+}
 
-## hubコマンド
-eval "$(hub alias -s)"
+: "Setting Python" && {
+    ## pyenv
+    if [ -x "`which pyenv`" ]; then
+        export PYENV_ROOT="${HOME}/.pyenv"
+        export PATH="${PYENV_ROOT}/bin:$PATH"
+        eval "$(pyenv init -)"
+    fi
+
+    # alias
+    alias py='python'
+    alias pireq='pip install -r requirements.txt'
+    alias pifre='pip freeze > requirements.txt'
+
+    # virtualenv
+    function venv() {
+        PWD_FOR_VE_CREATE=`pwd`
+        virtualenv ./.venv --prompt='('`basename $PWD_FOR_VE_CREATE`')'
+        pip install --upgrade pip
+    }
+
+    # ディレクトリへ移動したらchpwdが呼ばれる
+    function vactivate() {
+        if [ -d ".venv" ]; then
+            source .venv/bin/activate
+        fi
+    }
+    autoload -Uz add-zsh-hook
+    add-zsh-hook chpwd vactivate
+
+    # 読み込み時にも実行
+    vactivate
+}
+
+: "Settings Go" && {
+    if [ -x "`which go`" ]; then
+        export GOROOT=`go env GOROOT`
+        export GOPATH=$HOME/code/go-local
+        export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+    fi
+}
+
+: "Setting Naoqi" && {
+    export NAOQI_ROOT="${HOME}/naoqi"
+    if [ -d "${NAOQI_ROOT}" ]; then
+        export NAOQI_VERSION="2.7-2.1.4.13-mac64"
+        export PYTHONPATH=${PYTHONPATH}:${NAOQI_ROOT}/pynaoqi-python${NAOQI_VERSION}
+        export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:${NAOQI_ROOT}/pynaoqi-python${NAOQI_VERSION}
+    fi
+}
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -172,59 +227,11 @@ alias sudo='sudo '
 alias -g L='| less'
 alias -g G='| grep'
 
-# ruby
-alias bex='bundle exec'
-
-# python
-alias py='python'
-alias pireq='pip install -r requirements.txt'
-alias pifre='pip freeze > requirements.txt'
-
-# virtualenv
-function venv() {
-    PWD_FOR_VE_CREATE=`pwd`
-    virtualenv ./.venv --prompt='('`basename $PWD_FOR_VE_CREATE`')'
-    pip install --upgrade pip
-}
-
-# zsh でディレクトリ変更したらchpwdが呼ばれる
-function vactivate() {
-  if [ -d .venv ]; then
-      source .venv/bin/activate
-  fi
-}
-autoload -Uz add-zsh-hook
-add-zsh-hook chpwd vactivate
-
-# 読み込み時にも実行
-vactivate
-
-# git
-# vim:set ft=zsh:
-function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
-
-# カスタムスクリプト
-## Proxy
-alias nswitch="source ~/.switch_proxy"
-# 読み込み時にも実行
-nswitch
-
-## fmt_python
-alias pyform='python ~/scripts/python/fmt_python.py'
-## git
-alias gipy='gi python > .gitignore; echo "# virtualenv\n.venv/\n\n# PyCharm\n.idea/\n" >> .gitignore'
-
-
-
-alias firefox="open -a Firefox"
-alias safari="open -a Safari"
-alias chrome="open /Applications/Google\ Chrome.app"
-
 # colordiff
 if [[ -x `which colordiff` ]]; then
-  alias diff='colordiff'
+    alias diff='colordiff'
 else
-  alias diff='diff'
+    alias diff='diff'
 fi
 
 # less
@@ -234,9 +241,14 @@ export LESS='-R'
 # OS 別の設定
 case ${OSTYPE} in
     darwin*)
-        #Mac用の設定
+        # Mac用の設定
         export CLICOLOR=1
         alias ls='ls -G -F'
+
+        # Mac App
+        alias firefox="open -a Firefox"
+        alias safari="open -a Safari"
+        alias chrome="open /Applications/Google\ Chrome.app"
 
         #関数定義(引数3つ)
         tab-color() {
@@ -252,12 +264,12 @@ case ${OSTYPE} in
         function chpwd() { ls; echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007"}
         alias top='tab-color 134 200 0; top; tab-reset'
         ;;
-    linux*)
 
+    linux*)
         #Linux用の設定
         alias ls='ls -F --color=auto'
         ;;
 esac
 
 # added by travis gem
-[ -f /Users/shiraishi/.travis/travis.sh ] && source /Users/shiraishi/.travis/travis.sh
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
