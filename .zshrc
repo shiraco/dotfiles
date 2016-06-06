@@ -10,15 +10,25 @@ export LC_ALL=ja_JP.UTF-8
 export LC_MESSAGES=ja_JP.UTF-8
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 export GREP_OPTIONS='--color=auto'
-
 export EDITOR='vim'
 
 : "Setting Proxy" && {
-    alias nswitch="source ~/.switch_proxy"
-    # 読み込み時にも実行
-    if [ -f "~/.switch_proxy" ]; then
-        nswitch
+    if [ -f "${HOME}/.switch_proxy" ]; then
+        alias nswitch="source ${HOME}/.switch_proxy"
     fi
+}
+
+: "Setting Network" && {
+    # network location switch
+    if [[ -x `which peco` ]]; then
+        alias nwl='scselect | sed -e 1d -e "s/[^(]*(\(.*\))/\1/g" | peco --prompt "Select network env:" | xargs scselect'
+    fi
+
+    alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+    alias wifioff='networksetup -setairportpower en0 off'
+    alias wifion='networksetup -setairportpower en0 on'
+    alias wifils="airport -s | awk 'NR > 1 {print `$1`}'"
+    alias chwifi='wifils | peco --prompt "Select network env:" | xargs scselect'
 }
 
 : "Setting Git" && {
@@ -40,9 +50,9 @@ export EDITOR='vim'
 
 : "Setting Ruby" && {
     ## rbenv
-    export RBENV_ROOT="$HOME/.rbenv"
+    export RBENV_ROOT="${HOME}/.rbenv"
     if [ -d "${RBENV_ROOT}" ]; then
-        export PATH="$RBENV_ROOT/bin:$PATH"
+        export PATH="${RBENV_ROOT}/bin:${PATH}"
         eval "$(rbenv init -)"
     fi
 
@@ -54,7 +64,7 @@ export EDITOR='vim'
     ## pyenv
     export PYENV_ROOT="${HOME}/.pyenv"
     if [ -d "${PYENV_ROOT}" ]; then
-        export PATH="${PYENV_ROOT}/bin:$PATH"
+        export PATH="${PYENV_ROOT}/bin:${PATH}"
         eval "$(pyenv init -)"
     fi
 
@@ -66,7 +76,7 @@ export EDITOR='vim'
     # virtualenv
     function venv() {
         PWD_FOR_VE_CREATE=`pwd`
-        virtualenv ./.venv --prompt='('`basename $PWD_FOR_VE_CREATE`')'
+        virtualenv ./.venv --prompt='('`basename ${PWD_FOR_VE_CREATE}`')'
         pip install --upgrade pip
     }
 
@@ -76,18 +86,18 @@ export EDITOR='vim'
             source .venv/bin/activate
         fi
     }
-    autoload -Uz add-zsh-hook
-    add-zsh-hook chpwd vactivate
+    # autoload -Uz add-zsh-hook
+    # add-zsh-hook chpwd vactivate
 
     # 読み込み時にも実行
-    vactivate
+    # vactivate
 }
 
 : "Settings Go" && {
     if [ -x "`which go`" ]; then
         export GOROOT=`go env GOROOT`
-        export GOPATH=$HOME/code/go-local
-        export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+        export GOPATH=${HOME}/code/go-local
+        export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
     fi
 }
 
@@ -98,6 +108,16 @@ export EDITOR='vim'
         export PYTHONPATH=${PYTHONPATH}:${NAOQI_ROOT}/pynaoqi-python${NAOQI_VERSION}
         export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:${NAOQI_ROOT}/pynaoqi-python${NAOQI_VERSION}
     fi
+}
+
+: "Setting Heroku" && {
+    # heroku
+    alias herokuenv="heroku config | awk 'NR > 1 {print $1$2}' | sed -e 's/:/=/'"
+}
+
+: "Setting Travis" && {
+    # added by travis gem
+    [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 }
 
 # 色を使用出来るようにする
@@ -112,12 +132,15 @@ SAVEHIST=1000000
 # http://dqn.sakusakutto.jp/2014/10/emacs_shell_iterm2_zsh.html
 DISABLE_AUTO_TITLE="true"
 
-# プロンプト
-# 1行表示
-PROMPT="%~ %# "
-# 2行表示
-# PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-# %# "
+function reprompt() {
+    # プロンプト
+    # 1行表示
+    PROMPT="%~ %# "
+    # 2行表示
+    # PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+    # %# "
+}
+reprompt
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -132,7 +155,7 @@ zstyle ':zle:*' word-style unspecified
 # 補完機能を有効にする
 
 #for zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions ${fpath})
 
 autoload -Uz compinit
 compinit -u
@@ -237,6 +260,10 @@ fi
 # less
 export LESS='-R'
 
+nswitch
+
+
+
 ########################################
 # OS 別の設定
 case ${OSTYPE} in
@@ -270,6 +297,3 @@ case ${OSTYPE} in
         alias ls='ls -F --color=auto'
         ;;
 esac
-
-# added by travis gem
-[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
