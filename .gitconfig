@@ -29,4 +29,3 @@
     default = current
 [diff]
     algorithm = patience
-
