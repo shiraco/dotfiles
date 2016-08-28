@@ -91,6 +91,15 @@ export EDITOR='vim'
 
     # 読み込み時にも実行
     # vactivate
+
+    # direnv for virtualenv
+    show_virtual_env() {
+        if [ -n "$VIRTUAL_ENV" ]; then
+            echo "(virtualenv)"
+        fi
+    }
+
+    PS1='$(show_virtual_env)'$PS1
 }
 
 : "Settings Go" && {
@@ -297,3 +306,4 @@ case ${OSTYPE} in
         alias ls='ls -F --color=auto'
         ;;
 esac
+export PATH="/usr/local/sbin:$PATH"
