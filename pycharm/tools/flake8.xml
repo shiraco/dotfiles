@@ -1,36 +1,16 @@
 <toolSet name="Flake8">
-  <tool name="Flake8 File" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
-    <exec>
-      <option name="COMMAND" value="flake8" />
-      <option name="PARAMETERS" value="--max-line-length=120 --ignore=E301,E302,E261,E262,W404,D100,D202,D400,F403,H303,H403,H404,H405,I100,I201 $FileDir$/$FileName$" />
-      <option name="WORKING_DIRECTORY" value="$FileDir$" />
-    </exec>
-    <filter>
-      <option name="NAME" value="Flake8 Output Filter" />
-      <option name="DESCRIPTION" />
-      <option name="REGEXP" value="$FILE_PATH$\:$LINE$\:$COLUMN$\:.*" />
-    </filter>
-    <filter>
-      <option name="NAME" value="Flake8 Output Filter Case 2" />
-      <option name="DESCRIPTION" />
-      <option name="REGEXP" value="$FILE_PATH$\:$LINE$\:.*" />
-    </filter>
-  </tool>
   <tool name="Flake8 Directory" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="true" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
     <exec>
       <option name="COMMAND" value="flake8" />
-      <option name="PARAMETERS" value="--max-line-length=120 --ignore=E301,E302,E261,E262,W404,D100,D202,D400,F403,H303,H403,H404,H405,I100,I201 $FileDir$" />
+      <option name="PARAMETERS" value="--max-line-length=120 --ignore=D100,D101,D102,D202,D203,D205,D400,E261,E262,E301,E302,E402,H301,H306,H404,H405,I100,I201,W404 $FileDir$" />
       <option name="WORKING_DIRECTORY" value="$FileDir$" />
     </exec>
-    <filter>
-      <option name="NAME" value="Flake8 Parser" />
-      <option name="DESCRIPTION" />
-      <option name="REGEXP" value="$FILE_PATH$\:$LINE$\:$COLUMN$\:.*" />
-    </filter>
-    <filter>
-      <option name="NAME" value="Flake8 Output Parser Case 2" />
-      <option name="DESCRIPTION" />
-      <option name="REGEXP" value="$FILE_PATH$\:$LINE$\:.*" />
-    </filter>
+  </tool>
+  <tool name="Flake8 File" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="true" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="flake8" />
+      <option name="PARAMETERS" value="--max-line-length=120 --ignore=D100,D101,D102,D202,D203,D205,D400,E261,E262,E301,E302,E402,H301,H306,H404,H405,I100,I201,W404 $FileDir$/$FileName$" />
+      <option name="WORKING_DIRECTORY" value="$FileDir$" />
+    </exec>
   </tool>
 </toolSet>
