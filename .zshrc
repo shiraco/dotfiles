@@ -16,19 +16,21 @@ export EDITOR='vim'
     if [ -f "${HOME}/.switch_proxy" ]; then
         alias nswitch="source ${HOME}/.switch_proxy"
     fi
+    if [ -f "${HOME}/.switch_location" ]; then
+        alias lswitch="source ${HOME}/.switch_location"
+    fi
 }
 
 : "Setting Network" && {
-    # network location switch
-    if [[ -x `which peco` ]]; then
-        alias nwl='scselect | sed -e 1d -e "s/[^(]*(\(.*\))/\1/g" | peco --prompt "Select network env:" | xargs scselect'
-    fi
-
     alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
     alias wifioff='networksetup -setairportpower en0 off'
     alias wifion='networksetup -setairportpower en0 on'
     alias wifils="airport -s | awk 'NR > 1 {print `$1`}'"
-    alias chwifi='wifils | peco --prompt "Select network env:" | xargs scselect'
+
+    if [[ -x `which peco` ]]; then
+        alias chwifi='wifils | peco --prompt "Select wifi network env:" | xargs scselect'
+        alias nwl='scselect | sed -e 1d -e "s/[^(]*(\(.*\))/\1/g" | peco --prompt "Select network location env:" | xargs scselect'
+    fi
 }
 
 : "Setting Git" && {
@@ -110,15 +112,6 @@ export EDITOR='vim'
     fi
 }
 
-: "Setting Naoqi" && {
-    export NAOQI_ROOT="${HOME}/naoqi"
-    if [ -d "${NAOQI_ROOT}" ]; then
-        export NAOQI_VERSION="2.7-2.1.4.13-mac64"
-        export PYTHONPATH=${PYTHONPATH}:${NAOQI_ROOT}/pynaoqi-python${NAOQI_VERSION}
-        export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:${NAOQI_ROOT}/pynaoqi-python${NAOQI_VERSION}
-    fi
-}
-
 : "Setting Heroku" && {
     # heroku
     alias herokuenv="heroku config | awk 'NR > 1 {print $1$2}' | sed -e 's/:/=/'"
@@ -129,6 +122,10 @@ export EDITOR='vim'
     [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 }
 
+: "Setting Postgre" && {
+    # PostgreSQL設定（DBの置き場所）
+    export PGDATA=/usr/local/var/postgres
+}
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
@@ -232,6 +229,9 @@ setopt hist_reduce_blanks
 
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
+
+# zsh: no matches found がでないようにする
+setopt nonomatch
 
 ########################################
 # キーバインド
